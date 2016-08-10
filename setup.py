@@ -4,7 +4,7 @@
 from os.path import abspath, dirname, join
 from setuptools import setup
 
-version = "0.2"
+version = "0.2.1"
 
 setup(
     name="django-twilio-sms",
@@ -15,8 +15,8 @@ setup(
     author="Filip Wasilewski",
     author_email="en@ig.ma",
 
-    url="https://github.com/nigma/django-twilio-sms",
-    download_url="https://github.com/nigma/django-twilio-sms/zipball/master",
+    url="https://github.com/mastizada/django-twilio-sms",
+    download_url="https://github.com/mastizada/django-twilio-sms/zipball/master",
 
     long_description=open("README.rst").read(),
 
