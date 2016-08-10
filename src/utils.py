@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from decimal import Decimal
+from time import strptime, strftime
 import logging
 
 from django.conf import settings
@@ -78,7 +79,9 @@ def send_sms(request, to_number, body, callback_urlname="sms_status_callback"):
         if sent.price:
             message.price = Decimal(force_text(sent.price))
             message.price_unit = sent.price_unit
-        message.sent_at = sent.date_created
+        rfc2822_time = strptime(sent.date_created, '%a, %d %b %Y %H:%M:%S +0000')
+        sent_at = strftime('%Y-%m-%d %H:%M:%S', rfc2822_time)
+        message.sent_at = sent_at
         message.save(update_fields=[
             "sms_sid", "account_sid", "status", "to_parsed",
             "price", "price_unit", "sent_at"
