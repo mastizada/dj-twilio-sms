@@ -79,7 +79,7 @@ def send_sms(request, to_number, body, callback_urlname="sms_status_callback"):
         if sent.price:
             message.price = Decimal(force_text(sent.price))
             message.price_unit = sent.price_unit
-        rfc2822_time = strptime(sent.date_created, '%a, %d %b %Y %H:%M:%S +0000')
+        rfc2822_time = strptime(str(sent.date_created), '%a, %d %b %Y %H:%M:%S +0000')
         sent_at = strftime('%Y-%m-%d %H:%M:%S', rfc2822_time)
         message.sent_at = sent_at
         message.save(update_fields=[

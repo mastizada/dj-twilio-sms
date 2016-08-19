@@ -40,6 +40,6 @@ setup(
     install_requires=[
         "django",
         "djangorestframework>=2.3",
-        "twilio>=3.5.1",
+        "twilio>=5.4.0",
     ]
 )
