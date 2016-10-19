@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.utils.encoding import force_text
 from twilio.rest import TwilioRestClient
 from decimal import Decimal
+from pytz import timezone
 
 from .models import OutgoingSMS
 
@@ -75,7 +76,8 @@ def send_sms(request, to_number, body, callback_urlname="sms_status_callback"):
         if sent.price:
             message.price = Decimal(force_text(sent.price))
             message.price_unit = sent.price_unit
-        message.sent_at = sent.date_created
+        # Messages returned from Twilio are in UTC
+        message.sent_at = sent.date_created.replace(tzinfo=timezone('UTC'))
         message.save(update_fields=[
             "sms_sid", "account_sid", "status", "to_parsed",
             "price", "price_unit", "sent_at"

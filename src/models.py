@@ -30,12 +30,12 @@ class OutgoingSMS(models.Model):
     to_number = models.CharField(max_length=30)
     to_parsed = models.CharField(max_length=30, default="", blank=True)
     body = models.TextField(max_length=160, default="", blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
     sent_at = models.DateTimeField(null=True, blank=True)
     delivered_at = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=20, default="", blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     price_unit = models.CharField(max_length=3, default="", blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = _("Outgoing SMS")
