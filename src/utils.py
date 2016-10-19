@@ -1,20 +1,16 @@
-#-*- coding: utf-8 -*-
-
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from decimal import Decimal
-from time import strptime, strftime
 import logging
-
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_text
-
 from twilio.rest import TwilioRestClient
+from decimal import Decimal
 
 from .models import OutgoingSMS
 
-logger = logging.getLogger("django-twilio-sms.utils")
+logger = logging.getLogger("dj-twilio-sms.utils")
 
 
 def build_callback_url(request, urlname, message):

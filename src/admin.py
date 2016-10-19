@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-
 from __future__ import unicode_literals
-
 from django.contrib import admin
-
 from .models import IncomingSMS, OutgoingSMS
 
 
@@ -15,7 +12,7 @@ class IncomingSMSAdmin(admin.ModelAdmin):
         "created_at"
     ]
     list_filter = ["to_number", "from_country", "from_state", "from_city", ]
-    search_fields = ["from_number", "body"]
+    search_fields = ["from_number", "body", ]
 
 
 class OutgoingSMSAdmin(admin.ModelAdmin):

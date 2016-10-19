@@ -1,35 +1,31 @@
-django-twilio-sms
+dj-twilio-sms
 =================
 
-Twilio integration for SMS-based Django apps
+Twilio SMS Integration for Django
 
-.. image:: https://pypip.in/v/django-twilio-sms/badge.png
-    :target: https://pypi.python.org/pypi/django-twilio-sms/
-    :alt: Latest Version
+.. image:: https://badge.fury.io/py/dj-twilio-sms.svg
+    :target: https://pypi.python.org/pypi/dj-twilio-sms/
+    :alt: pypi
 
-.. image:: https://pypip.in/d/django-twilio-sms/badge.png
-    :target: https://pypi.python.org/pypi/django-twilio-sms/
-    :alt: Downloads
+This is fork of `nigma/django-twilio-sms` (Filip Wasilewski en[at]ig[dot]ma) as original package has stopped maintenance.
 
-.. image:: https://pypip.in/license/django-twilio-sms/badge.png
-    :target: https://pypi.python.org/pypi/django-twilio-sms/
-    :alt: License
+This package updated with Django 1.10 support.
 
-Developed and used at `en.ig.ma software shop <http://en.ig.ma>`_.
+Used for SMS messages in SiteLedger.
 
 
 Quickstart
 ----------
 
-1. Include ``django-twilio-sms`` in your ``requirements.txt`` file.
+1. Include ``dj-twilio-sms`` in your ``requirements.txt`` file.
 
-2. Add ``django_twilio_sms`` to ``INSTALLED_APPS`` and syncdb/migrate.
+2. Add ``dj_twilio_sms`` to ``INSTALLED_APPS`` and migrate (makemigrations dj-twilio-sms/migrate).
 
 3. Add the following url to your urlconf:
-   
+
    .. code-block:: python
 
-       url(r"^messaging/", include("django_twilio_sms.urls")),
+       url(r"^messaging/", include("dj_twilio_sms.urls")),
 
    this will receive confirmation callbacks for any SMS message
    that you send using ``utils.send_sms``.
@@ -47,29 +43,20 @@ Quickstart
 
    - TWILIO_CALLBACK_USE_HTTPS - use https or not for delivery confirmation
      callback urls.
-   
+
    - TWILIO_CALLBACK_DOMAIN - optionally set domain name or IP of your site
      (otherwise the server name will be extracted from the request info).
-   
+
    - TWILIO_DRY_MODE - set if you want to run in test mode.
 
 
 License
 -------
 
-``django-twilio-sms`` is released under the MIT license.
+``django-twilio-sms`` and ``dj-twilio-sms`` is released under the MIT license.
 
 Other Resources
 ---------------
 
-- GitHub repository - https://github.com/nigma/django-twilio-sms
-- PyPi Package site - http://pypi.python.org/pypi/django-twilio-sms
-
-
-Commercial Support
-------------------
-
-This app and many other help us build better software
-and focus on delivering quality projects faster.
-We would love to help you with your next project so get in touch
-by dropping an email at en@ig.ma.
+- GitHub repository - https://github.com/mastizada/dj-twilio-sms
+- PyPi Package site - https://pypi.python.org/pypi/dj-twilio-sms

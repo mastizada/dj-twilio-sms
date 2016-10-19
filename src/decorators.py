@@ -4,7 +4,6 @@
 # Updated to support Python 2/3
 
 from __future__ import unicode_literals
-
 from functools import wraps
 import logging
 
@@ -17,7 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 from twilio.twiml import Verb
 from twilio.util import RequestValidator
 
-logger = logging.getLogger("django-twilio-sms.decorators")
+logger = logging.getLogger("dj-twilio-sms.decorators")
 
 
 def twilio_view(f):

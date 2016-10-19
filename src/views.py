@@ -1,13 +1,10 @@
-#-*- coding: utf-8 -*-
-
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 import logging
-
 from django.http import HttpResponse
 from django.views.generic import View
 from django.views.generic.detail import SingleObjectMixin
-
 from rest_framework import status
 from twilio import twiml
 
@@ -15,7 +12,7 @@ from .decorators import twilio_view
 from .models import OutgoingSMS
 from .serializers import SMSRequestSerializer, SMSStatusSerializer
 
-logger = logging.getLogger("django-twilio-sms.views")
+logger = logging.getLogger("dj-twilio-sms.views")
 
 
 class TwilioView(View):

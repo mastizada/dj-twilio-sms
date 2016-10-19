@@ -1,44 +1,44 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-from os.path import abspath, dirname, join
 from setuptools import setup
 
-version = "0.2.1"
+version = "0.3.0"
+
+with open('README.rst', 'r') as f:
+    readme = f.read()
 
 setup(
-    name="django-twilio-sms",
+    name="dj-twilio-sms",
     version=version,
-    description="Twilio integration for SMS-based Django apps",
+    description="Twilio SMS Integration for Django",
     license="MIT",
 
-    author="Filip Wasilewski",
-    author_email="en@ig.ma",
+    author="Emin Mastizada",
+    author_email="emin@mastizada.com",
 
-    url="https://github.com/mastizada/django-twilio-sms",
-    download_url="https://github.com/mastizada/django-twilio-sms/zipball/master",
+    url="https://github.com/mastizada/dj-twilio-sms",
+    download_url="https://github.com/mastizada/dj-twilio-sms/zipball/master",
 
-    long_description=open("README.rst").read(),
+    long_description=readme,
 
-    package_dir={"django_twilio_sms": "src"},
-    packages=["django_twilio_sms"],
+    package_dir={"dj_twilio_sms": "src"},
+    packages=["dj_twilio_sms"],
     include_package_data=True,
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
+        "License :: OSI Approved :: MIT License",
         "Environment :: Web Environment",
         "Framework :: Django",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.2",
-        "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
         "Topic :: Software Development :: Libraries :: Python Modules"
     ],
     install_requires=[
-        "django",
+        "Django",
         "djangorestframework>=2.3",
         "twilio>=5.4.0",
     ]
