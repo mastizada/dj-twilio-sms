@@ -1,5 +1,2 @@
 include README.rst
 include LICENSE
-recursive-include docs *.rst *
-prune docs/_build
-include Makefile
