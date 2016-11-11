@@ -6,6 +6,9 @@ Twilio SMS Integration for Django
 .. image:: https://badge.fury.io/py/dj-twilio-sms.svg
     :target: https://pypi.python.org/pypi/dj-twilio-sms/
     :alt: pypi
+.. image:: https://travis-ci.org/mastizada/dj-twilio-sms.svg?branch=master
+    :target: https://travis-ci.org/mastizada/dj-twilio-sms
+    :alt: travis
 
 This is fork of `nigma/django-twilio-sms` (Filip Wasilewski en[at]ig[dot]ma) as original package has stopped maintenance.
 
