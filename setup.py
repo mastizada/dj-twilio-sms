@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
 
-version = "0.3.0"
+version = "1.0.0"
 
 with open('README.rst', 'r') as f:
     readme = f.read()
@@ -11,17 +11,14 @@ setup(
     name="dj-twilio-sms",
     version=version,
     description="Twilio SMS Integration for Django",
+    keywords='django twilio sms',
     license="MIT",
-
     author="Emin Mastizada",
-    author_email="emin@mastizada.com",
-
+    author_email="emin@linux.com",
     url="https://github.com/mastizada/dj-twilio-sms",
     download_url="https://github.com/mastizada/dj-twilio-sms/zipball/master",
-
     long_description=readme,
-
-    package_dir={"dj_twilio_sms": "src"},
+    package_dir={"dj_twilio_sms": "dj_twilio_sms"},
     packages=["dj_twilio_sms"],
     include_package_data=True,
     classifiers=[

@@ -9,9 +9,9 @@ Twilio SMS Integration for Django
 
 This is fork of `nigma/django-twilio-sms` (Filip Wasilewski en[at]ig[dot]ma) as original package has stopped maintenance.
 
-This package updated with Django 1.10 support.
+Django 1.10 support, migrations, timezone improvements.
 
-Used for SMS messages in SiteLedger.
+Used for SMS messages in SiteLedger project.
 
 
 Quickstart
@@ -19,7 +19,7 @@ Quickstart
 
 1. Include ``dj-twilio-sms`` in your ``requirements.txt`` file.
 
-2. Add ``dj_twilio_sms`` to ``INSTALLED_APPS`` and migrate (makemigrations dj-twilio-sms/migrate).
+2. Add ``dj_twilio_sms`` to ``INSTALLED_APPS`` and migrate (manage.py migrate).
 
 3. Add the following url to your urlconf:
 
@@ -48,6 +48,15 @@ Quickstart
      (otherwise the server name will be extracted from the request info).
 
    - TWILIO_DRY_MODE - set if you want to run in test mode.
+
+
+Django Version Support
+----------------------
+
+- Django 1.8, 1.9 and 1.10
+- Python 2.7 and 3.5
+
+It should work with Django 1.6 and 1.7, but you need to downgrade django-rest-framework for these versions.
 
 
 License
