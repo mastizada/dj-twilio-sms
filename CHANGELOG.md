@@ -6,6 +6,7 @@ Changes
 * Fixed bug in decorator
 * Added test for twilio response by simulating twilio request.
 * CHANGELOG added
+* De-attached from fork in github due to complex pull requests (github uses fork by default)
 
 # 1.0.0
 
