@@ -3,6 +3,7 @@ import os
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEBUG = True
+SMS_DEBUG = DEBUG
 
 DATABASES = {
     'default': {

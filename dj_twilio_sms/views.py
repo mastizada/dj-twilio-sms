@@ -42,7 +42,7 @@ class TwilioView(View):
         if response_text:
             response.sms(response_text)
 
-        response = HttpResponse(str(response), mimetype='application/xml')
+        response = HttpResponse(str(response), content_type='application/xml')
         return response
 
 

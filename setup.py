@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
 
-version = "1.0.0"
+version = "1.1.0"
 
 with open('README.rst', 'r') as f:
     readme = f.read()
@@ -30,7 +30,6 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Topic :: Software Development :: Libraries :: Python Modules"
     ],

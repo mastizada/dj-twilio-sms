@@ -59,7 +59,7 @@ def twilio_view(f):
             logger.error("Twilio: Expected POST request", extra={"request": request})
             return HttpResponseNotAllowed(request.method)
 
-        if not getattr(settings, "TWILIO_SKIP_SIGNATURE_VALIDATION"):
+        if not getattr(settings, "TWILIO_SKIP_SIGNATURE_VALIDATION", False):
             # Validate the request
             try:
                 validator = RequestValidator(settings.TWILIO_AUTH_TOKEN)
@@ -78,7 +78,7 @@ def twilio_view(f):
 
             # Now that we have all the required information to perform forgery
             # checks, we'll actually do the forgery check.
-            if not validator.validate(url, request.POST, signature):
+            if not validator.validate(url, request.POST, signature) and not getattr(settings, "SMS_DEBUG", False):
                 logger.error(
                     "Twilio: Invalid url signature %s - %s - %s",
                     url, request.POST, signature, extra={"request": request}
