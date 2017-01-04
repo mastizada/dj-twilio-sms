@@ -1,26 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from setuptools import setup
+from setuptools import setup, find_packages
+import os
 
-version = "1.1.0"
+version = "1.2.0"
 
-with open('README.rst', 'r') as f:
-    readme = f.read()
+with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as f:
+    README = f.read()
+
+# os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name="dj-twilio-sms",
     version=version,
-    description="Twilio SMS Integration for Django",
-    keywords='django twilio sms',
+    packages=find_packages(exclude=['example.*', 'example']),
+    include_package_data=True,
     license="MIT",
+    description="Twilio SMS Integration for Django",
+    long_description=README,
+    keywords='django twilio sms',
+    url="https://github.com/mastizada/dj-twilio-sms",
     author="Emin Mastizada",
     author_email="emin@linux.com",
-    url="https://github.com/mastizada/dj-twilio-sms",
     download_url="https://github.com/mastizada/dj-twilio-sms/zipball/master",
-    long_description=readme,
-    package_dir={"dj_twilio_sms": "dj_twilio_sms"},
-    packages=["dj_twilio_sms"],
-    include_package_data=True,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: MIT License",
@@ -37,5 +39,5 @@ setup(
         "Django",
         "djangorestframework>=2.4.7",
         "twilio>=5.6.0",
-    ]
+    ],
 )

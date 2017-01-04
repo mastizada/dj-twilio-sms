@@ -1,6 +1,10 @@
 Changes
 -------
 
+# 1.2.0
+
+* Fixed setup using django documentations (included migrations folder)
+
 # 1.1.0
 
 * Fixed bug in decorator
