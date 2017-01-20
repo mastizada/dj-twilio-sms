@@ -5,6 +5,8 @@ import logging
 from django.http import HttpResponse
 from django.views.generic import View
 from django.views.generic.detail import SingleObjectMixin
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from rest_framework import status
 from twilio import twiml
 
@@ -21,6 +23,10 @@ class TwilioView(View):
     """
 
     response_text = None
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(TwilioView, self).dispatch(request, *args, **kwargs)
 
     def get_data(self):
         return self.request.POST
@@ -58,7 +64,7 @@ class IncomingSMSView(TwilioView):
 
         serializer = SMSRequestSerializer(data=data)
         if serializer.is_valid():
-            self.object = serializer.save(force_insert=True)
+            self.object = serializer.save()
             self.post_save(self.object)
         else:
             logger.error(

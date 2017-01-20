@@ -20,9 +20,9 @@ Used for SMS messages in SiteLedger project.
 Quickstart
 ----------
 
-1. Include ``dj-twilio-sms`` in your ``requirements.txt`` file.
+1. Install ``dj-twilio-sms`` using ``pip``.
 
-2. Add ``dj_twilio_sms`` to ``INSTALLED_APPS`` and migrate (manage.py migrate).
+2. Add ``dj_twilio_sms`` to ``INSTALLED_APPS`` and migrate (``manage.py migrate``).
 
 3. Add the following url to your urlconf:
 
@@ -31,15 +31,11 @@ Quickstart
        url(r"^messaging/", include("dj_twilio_sms.urls")),
 
    this will receive confirmation callbacks for any SMS message
-   that you send using ``utils.send_sms``.
+   that you send using ``utils.send_sms`` also will receive incoming messages.
 
-4. Create a new view and override ``IncomingSMSView.post_save(self, obj)`` method
-   to receive SMS messages via callbacks from Twilio. The received ``obj``
-   param will be an instance of ``IncomingSMS`` model.
+4. Configure Twilio callback to send notifications to the above view's url. (ex: ``/messaging/reply/`` for inbound messages)
 
-5. Configure Twilio callback to send notifications to the above view's url.
-
-6. Configure settings:
+5. Configure settings:
 
    - TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER - copy
      credentials from the Twilio panel.

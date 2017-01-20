@@ -1,6 +1,12 @@
 Changes
 -------
 
+# 1.3.0
+
+* Added url for inbound messages (receive sms messages)
+* Fixed problem with IncomingSMSView
+* Improved test project (logging and settings improvements)
+
 # 1.2.0
 
 * Fixed setup using django documentations (included migrations folder)

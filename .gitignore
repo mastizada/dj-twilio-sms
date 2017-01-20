@@ -36,5 +36,7 @@ NOTE.md
 
 # Example project
 venv/
+example/sqlite.db
+example/debug.log
 environment.conf
 environment.sh
