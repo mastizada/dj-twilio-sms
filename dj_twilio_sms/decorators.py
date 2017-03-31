@@ -67,7 +67,7 @@ def twilio_view(f):
                 # Ensure the original requested url is tested for validation
                 # Prevents breakage when processed behind a proxy server
                 if "HTTP_X_FORWARDED_SERVER" in request.META:
-                    protocol = "https" if request.META["HTTP_X_TWILIO_SSL"] == "Enabled" else "http"
+                    protocol = "https" if request.META.get("HTTP_X_TWILIO_SSL") == "Enabled" else "http"
                     url = "{0}://{1}{2}".format(
                         protocol, request.META["HTTP_X_FORWARDED_SERVER"], request.META["REQUEST_URI"]
                     )
