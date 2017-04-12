@@ -5,7 +5,7 @@ import logging
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_text
-from twilio.rest import TwilioRestClient
+from twilio.rest import Client
 from decimal import Decimal
 from pytz import timezone
 
@@ -44,7 +44,7 @@ def send_sms(request, to_number, body, callback_urlname="sms_status_callback"):
     """
     Create :class:`OutgoingSMS` object and send SMS using Twilio.
     """
-    client = TwilioRestClient(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
     from_number = settings.TWILIO_PHONE_NUMBER
 
     message = OutgoingSMS.objects.create(
@@ -61,7 +61,7 @@ def send_sms(request, to_number, body, callback_urlname="sms_status_callback"):
                  to_number, status_callback, body)
 
     if not getattr(settings, "TWILIO_DRY_MODE", False):
-        sent = client.sms.messages.create(
+        sent = client.messages.create(
             to=to_number,
             from_=from_number,
             body=body,

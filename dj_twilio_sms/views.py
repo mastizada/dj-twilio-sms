@@ -8,7 +8,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from rest_framework import status
-from twilio import twiml
+from twilio.twiml.messaging_response import MessagingResponse, Body
 
 from .decorators import twilio_view
 from .models import OutgoingSMS
@@ -21,7 +21,6 @@ class TwilioView(View):
     """
     Base view for Twilio callbacks
     """
-
     response_text = None
 
     @method_decorator(csrf_exempt)
@@ -42,11 +41,11 @@ class TwilioView(View):
         return self.response_text
 
     def get_response(self, message, **kwargs):
-        response = twiml.Response()
+        response = MessagingResponse()
 
         response_text = self.get_response_text()
         if response_text:
-            response.sms(response_text)
+            response.message(Body(response_text))
 
         response = HttpResponse(str(response), content_type='application/xml')
         return response
@@ -58,6 +57,7 @@ class IncomingSMSView(TwilioView):
 
     Override to add custom logic and configure url in the Twilio admin panel.
     """
+    object = None
 
     def handle_request(self, data):
         logger.debug("Received SMS message: %r", data)
@@ -86,6 +86,7 @@ class SMSStatusCallbackView(SingleObjectMixin, TwilioView):
 
     Configure callback url in the Twilio admin panel.
     """
+    object = None
 
     model = OutgoingSMS
 

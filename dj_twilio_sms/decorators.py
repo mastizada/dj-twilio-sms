@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-# Based on https://github.com/rdegges/django-twilio under Public Domain
-# Added logging and error reporting
-# Updated to support Python 2/3
-
 from __future__ import unicode_literals
 from functools import wraps
 import logging
@@ -13,8 +9,8 @@ from django.utils import six
 from django.utils.encoding import force_text
 from django.views.decorators.csrf import csrf_exempt
 
-from twilio.twiml import Verb
-from twilio.util import RequestValidator
+from twilio.twiml import TwiML
+from twilio.request_validator import RequestValidator
 
 logger = logging.getLogger("dj-twilio-sms.decorators")
 
@@ -34,7 +30,7 @@ def twilio_view(f):
           Twilio's servers instead of building a ``HttpResponse`` object
           manually.
 
-        - It allows your view to (optionally) return any ``twilio.Verb`` object
+        - It allows your view to (optionally) return any ``twilio.TwiML`` object
           instead of building a ``HttpResponse`` object manually.
 
     Usage::
@@ -67,9 +63,8 @@ def twilio_view(f):
                 # Ensure the original requested url is tested for validation
                 # Prevents breakage when processed behind a proxy server
                 if "HTTP_X_FORWARDED_SERVER" in request.META:
-                    protocol = "https" if request.META["HTTP_X_TWILIO_SSL"] == "Enabled" else "http"
                     url = "{0}://{1}{2}".format(
-                        protocol, request.META["HTTP_X_FORWARDED_SERVER"], request.META["REQUEST_URI"]
+                        request.META["HTTP_X_FORWARDED_PROTO"], request.META["HTTP_X_FORWARDED_SERVER"], request.META["REQUEST_URI"]
                     )
                 signature = request.META["HTTP_X_TWILIO_SIGNATURE"]
             except (AttributeError, KeyError) as e:
@@ -88,14 +83,14 @@ def twilio_view(f):
         # Run the wrapped view, and capture the data returned.
         response = f(request, *args, **kwargs)
 
-        # If the view returns a string (or a ``twilio.Verb`` object), we'll
+        # If the view returns a string (or a ``twilio.TwiML`` object), we'll
         # assume it is XML TwilML data and pass it back with the appropriate
         # mimetype. We won't check the XML data because that would be too time
         # consuming for every request. Instead, we'll let the errors pass
         # through to be dealt with by the developer.
         if isinstance(response, six.text_type):
             return HttpResponse(response, mimetype="application/xml")
-        elif isinstance(response, Verb):
+        elif isinstance(response, TwiML):
             return HttpResponse(force_text(response), mimetype="application/xml")
         else:
             return response
