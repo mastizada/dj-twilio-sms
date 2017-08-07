@@ -45,17 +45,17 @@ class TwilioView(View):
 
         response_text = self.get_response_text()
         if response_text:
-            response.message(Body(response_text))
+            response.message(response_text)
 
-        response = HttpResponse(str(response), content_type='application/xml')
+        response = HttpResponse(response.to_xml(), content_type='application/xml')
         return response
 
 
 class IncomingSMSView(TwilioView):
-    """
-    Base view for handling incoming SMS messages.
+    """Base view for handling incoming SMS messages.
 
-    Override to add custom logic and configure url in the Twilio admin panel.
+    @NOTE Configure url in the Twilio admin panel.
+    @NOTE Override this class' post_save function to add custom logic.
     """
     object = None
 
@@ -65,7 +65,7 @@ class IncomingSMSView(TwilioView):
         serializer = SMSRequestSerializer(data=data)
         if serializer.is_valid():
             self.object = serializer.save()
-            self.post_save(self.object)
+            self.post_save()
         else:
             logger.error(
                 "Failed validation of received SMS message: %s",
@@ -76,15 +76,14 @@ class IncomingSMSView(TwilioView):
 
         return self.get_response(message=self.object, data=data)
 
-    def post_save(self, obj):
+    def post_save(self):
         pass
 
 
 class SMSStatusCallbackView(SingleObjectMixin, TwilioView):
-    """
-    Callback view for tracking status of sent messages.
+    """Callback view for tracking status of sent messages.
 
-    Configure callback url in the Twilio admin panel.
+    @NOTE Configure callback url in the Twilio admin panel.
     """
     object = None
 
@@ -100,7 +99,7 @@ class SMSStatusCallbackView(SingleObjectMixin, TwilioView):
         serializer = SMSStatusSerializer(instance=self.object, data=data)
         if serializer.is_valid():
             self.object = serializer.save(force_update=True)
-            self.post_save(self.object)
+            self.post_save()
             logger.debug(
                 "Updated message status %s, %s: %s",
                 self.object.pk, self.object.sms_sid, self.object.status
@@ -114,7 +113,7 @@ class SMSStatusCallbackView(SingleObjectMixin, TwilioView):
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
         return self.get_response(message=self.object)
 
-    def post_save(self, obj):
+    def post_save(self):
         pass
 
 sms_status_callback_view = twilio_view(SMSStatusCallbackView.as_view())

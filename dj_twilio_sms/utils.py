@@ -3,11 +3,14 @@ from __future__ import unicode_literals
 
 import logging
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.utils.encoding import force_text
 from twilio.rest import Client
 from decimal import Decimal
 from pytz import timezone
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 
 from .models import OutgoingSMS
 
